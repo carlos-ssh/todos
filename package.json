@@ -4,7 +4,11 @@
   "description": "In this project, i will build a simple HTML list of To Do tasks. The list will be styled according to the specifications listed later in this lesson. This simple web page will be built using webpack and served by a webpack dev server.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "server": "node server.js",
+    "start": "webpack serve --open",
+    "watch": "webpack serve --watch"
   },
   "repository": {
     "type": "git",
