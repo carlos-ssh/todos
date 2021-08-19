@@ -5,7 +5,7 @@ export default class Completed {
   }
 
   static completeTodo(list) {
-    this.checkboxx = document.querySelectorAll('.checbox');
+    this.checkboxx = document.querySelectorAll('.checkbox');
     this.checkboxx.forEach((checkbox, index) => {
       checkbox.addEventListener('change', function checked() {
 	if (this.checked) {
