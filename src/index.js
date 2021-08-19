@@ -1,6 +1,6 @@
 import './style.css';
 
-let todos = JSON.parse(localStorage.getItem('todo') || [
+let todos = [
   {
     desctiption: "Take a shower",
     completed: false,
