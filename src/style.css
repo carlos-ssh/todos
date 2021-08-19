@@ -57,3 +57,23 @@ form {
   width: 100%;
 }
 
+form #input {
+  border: none;
+  width: 90%;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+form #input:focus {
+  outline: none;
+}
+
+form img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.drop:hover {
+  cursor: all-scroll;
+}
+
