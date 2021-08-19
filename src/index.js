@@ -15,7 +15,7 @@ let todos = [
     description: "Wash dishes",
     completed: true,
     index: 3
-  }
+  },
   {
     desctiption: "Go at the supermarket",
     completed: true,
