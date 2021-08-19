@@ -1,4 +1,4 @@
-module default class isCompleted {
+export default class Completed {
   static updateLocalStorage(list) {
     const data = JSON.stringify(list);
     localStorage.setItem('todo', data);
@@ -15,7 +15,7 @@ module default class isCompleted {
 	  checkbox.parentNode.querySelector('.text').classList.remove('trought-line');
 	  list[index].completed = false;
 	}
-	isCompleted.updateLocalStorage(list);
+	Completed.updateLocalStorage(list);
       });
     });
   }

@@ -1,6 +1,9 @@
 import './style.css';
+import Completed from './components/status.js' ;
 
-let todos = [
+
+const ul = document.querySelectorAll("ul");
+const todos = JSON.parse(localStorage.getItem('todo')) || [
   {
     desctiption: "Take a shower",
     completed: false,
@@ -23,7 +26,6 @@ let todos = [
   },
 ];
 
-const ul = document.querySelectorAll("ul");
 const displayTodos = () => {
   todos.forEach((item, index) => {
     const checkItem = item.completed ? 'checked' : '';
@@ -37,6 +39,7 @@ const displayTodos = () => {
       </li>
     `;
   });
+  Completed.completeTodo(todos);
 }
 
 displayTodos();
