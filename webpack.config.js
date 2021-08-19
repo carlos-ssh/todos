@@ -1,45 +1,43 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = {
-  entry: './src/index.js',
+module.exports = {
+  mode: 'development',
+  entry: {
+    index: './src/index.js',
+    print: './src/components/createList.js',
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Todo List',
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+    }),
+  ],
   output: {
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    clean: true,
+    publicPath: '/',
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.png$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png'
-            }
-          }
-        ]
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
       {
-        test: /\.svg$/,
-        use: 'file-loader'
-      }
-    ]
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      appMountId: 'app',
-      filename: 'index.html'
-    })
-  ]
-};
-
-module.exports = config;
+}; 

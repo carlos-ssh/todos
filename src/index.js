@@ -1,2 +1,9 @@
 import "./style.css";
-console.log("hello world!");
+
+import createList from "./createList";
+
+const run = () => {
+  createList();
+}
+
+run();
