@@ -26,7 +26,7 @@ const displayTodos = () => {
 
 displayTodos();
 
-clearItems = () => {
+const clearItems = () => {
   const ul = document.getElementById('list');
   ul.innerHTML = '';
 };
@@ -65,4 +65,30 @@ const clearAllCompleted = () => {
     IsCompleted.updateLocalStorage(todos);
   });
 };
+
 clearAllCompleted();
+
+const remove = () => {
+  window.addEventListener('click', (e) => {
+    const ul = document.getElementById('list');
+    if (e.target && e.target.className.includes('trash')) {
+      const id = parseInt(e.target.parentNode.id, 10);
+      todos.filter((todo) => todo.index !== id);
+      ul.innerHTML = '';
+      displayItems();
+      IsCompleted.updateLocalStorage(todos);
+    } else if (e.target && !e.target.className.includes('text')) {
+      const allLi = document.querySelector('#list').childNodes;
+      allLi.forEach((list) => {
+        const innerInput = list.querySelector('.text');
+
+        innerInput.parentNode.querySelector('.trash').className = 'fa fa-trash-o trash d-none';
+        innerInput.parentNode.querySelector('.open').classList.remove('d-none');
+        innerInput.parentNode.style.backgroundColor = '';
+        innerInput.style.backgroundColor = '';
+      });
+    }
+  });
+};
+
+remove();
