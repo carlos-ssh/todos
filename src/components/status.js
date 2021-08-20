@@ -19,4 +19,30 @@ export default class Completed {
       });
     });
   }
+
+  static changeIcon() {
+    this.inputs = document.querySelectorAll('.text');
+    this.trashes = document.querySelectorAll('.trash');
+    this.inputs.map((input, index) => {
+      input.addEventListener('focus', () => {
+	this.trashes[index].classList.toggle('d-none');
+      input.parentNode.querySelector('open').classList.toggle('d-none');
+      input.parentNode.style.backgroundColor = '#f9f9f9';
+      input.style.backgroundColor = '#f9f9f9';
+
+      const listAll = document.querySelector('#list').childNodes;
+
+      listAll.forEach((list) => {
+	const liText = list.querySelector('.text');     
+	  
+	  if (liText !== input) {
+            liText.parentNode.querySelector('.trash').className = 'fa fa-trash-o trash d-none';
+            liText.parentNode.querySelector('.open').classList.remove('d-none');
+            liText.parentNode.style.backgroundColor = '';
+            liText.style.backgroundColor = '';
+	  }
+	});
+      });
+    });
+  }
 }

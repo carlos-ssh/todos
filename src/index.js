@@ -3,28 +3,7 @@ import Completed from './components/status.js' ;
 
 
 const ul = document.querySelectorAll("ul");
-const todos = JSON.parse(localStorage.getItem('todo')) || [
-  {
-    description: "Take a shower",
-    completed: false,
-    index: 1,
-  },
-  {
-    description:"Read my new book",
-    completed: false,
-    index: 2,
-  },
-  {
-    description: "Wash asdfasdfasdfasdf dishes",
-    completed: true,
-    index: 3,
-  },
-  {
-    description: "Go at the supermarket",
-    completed: true,
-    index: 4,
-  },
-];
+const todos = JSON.parse(localStorage.getItem('todo')) || [];
 
 const displayTodos = () => {
   todos.forEach((item, index) => {
