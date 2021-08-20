@@ -21,6 +21,12 @@ const displayTodos = () => {
   });
  
   Completed.completeTodo(todos);
+  Completed.changeIcon();
 }
 
 displayTodos();
+
+clearItems = () => {
+  const ul = document.getElementById('list');
+  ul.innerHTML = '';
+};
