@@ -30,3 +30,39 @@ clearItems = () => {
   const ul = document.getElementById('list');
   ul.innerHTML = '';
 };
+
+const addTodo = () => {
+  const input = document.getElementById('input');
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+     const todo = input.value;
+      if (todo) {
+	const newTodo = {
+	  description: todo,
+	  completed: false,
+	  index: todos.length
+	};
+	todos.push(newTodo);
+	clearItems();
+	displayTodos();
+	Completed.updateLocalStorage(todos);
+      }
+      input.value = '';
+      event.preventDefault();
+    }
+  });
+};
+
+addTodo();
+
+const clearAllCompleted = () => {
+  const ul = document.getElementById('list');
+  const clearItems = document.getElementById('clear-items-completed');
+  clearItems.addEventListener('click', () => {
+    todos = todos.filter((todo) => !todo.completed);
+    ul.innerHTML = '';
+    displayItems();
+    IsCompleted.updateLocalStorage(todos);
+  });
+};
+clearAllCompleted();

@@ -23,7 +23,7 @@ export default class Completed {
   static changeIcon() {
     this.inputs = document.querySelectorAll('.text');
     this.trashes = document.querySelectorAll('.trash');
-    this.inputs.map((input, index) => {
+    this.inputs.forEach((input, index) => {
       input.addEventListener('focus', () => {
 	this.trashes[index].classList.toggle('d-none');
       input.parentNode.querySelector('open').classList.toggle('d-none');
