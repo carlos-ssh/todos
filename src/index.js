@@ -1,71 +1,56 @@
+/* eslint-disable no-use-before-define */
 import './style.css';
-import Completed from './components/status.js' ;
+import IsCompleted from './components/Status.js';
 
+let tasks = JSON.parse(localStorage.getItem('ToDo')) || [];
 
-const ul = document.querySelectorAll("ul");
-const todos = JSON.parse(localStorage.getItem('todo')) || [];
-
-const displayTodos = () => {
-  todos.forEach((item, index) => {
-    const checkItem = item.completed ? 'checked' : '';
-    const lineTrought = item.completed ? 'trought-line' : '';
+const displayItems = () => {
+  const ul = document.getElementById('list');
+  tasks.forEach((item, index) => {
+    const CHECK = item.completed ? 'checked' : '';
+    const TROUGHLINE = item.completed ? 'line-through' : '';
     item.index = index;
-    ul[0].innerHTML += `
-      <li>
-	<input type="checkbox" class="checkbox" id="checkbox-${item.index}" ${checkItem}>
-	  <h4 class="text ${lineTrought}">
-	    ${item.description}
-	  </h4>
-	  <img class="drop" src="https://img.icons8.com/ios-glyphs/30/000000/menu-2.png" alt="vertical menu"/>
-      </li>`;
+    ul.innerHTML += `<li id="${item.index}"><input type="checkbox" class="checkbox" id="checkbox-${item.index}" ${CHECK}><input class="text ${TROUGHLINE} text-${item.index}" type="text" value ="${item.description}"><i class="fa fa-ellipsis-v open" aria-hidden="true"></i><i class="fa fa-trash-o trash d-none" aria-hidden="true"></i></li>`;
   });
- 
-  Completed.completeTodo(todos);
-  Completed.changeIcon();
-}
-
-displayTodos();
+  IsCompleted.completeToDo(tasks);
+  IsCompleted.changeIcon();
+};
+displayItems();
 
 const clearItems = () => {
   const ul = document.getElementById('list');
   ul.innerHTML = '';
 };
 
-const addTodo = () => {
+const addToTheList = () => {
   const input = document.getElementById('input');
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-     const todo = input.value;
-      if (todo) {
-	const newTodo = {
-	  description: todo,
-	  completed: false,
-	  index: todos.length
-	};
-	todos.push(newTodo);
-	clearItems();
-	displayTodos();
-	Completed.updateLocalStorage(todos);
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const task = input.value;
+      if (task) {
+        const newTask = { description: task, completed: false, index: tasks.length };
+        tasks.push(newTask);
+        clearItems();
+        displayItems();
+        IsCompleted.updateLocalStorage(tasks);
       }
       input.value = '';
-      e.preventDefault();
+      event.preventDefault();
     }
   });
 };
-
-addTodo();
+addToTheList();
 
 const clearAllCompleted = () => {
   const ul = document.getElementById('list');
   const clearItems = document.getElementById('clear-items-completed');
   clearItems.addEventListener('click', () => {
-    todos = todos.filter((todo) => !todo.completed);
+    tasks = tasks.filter((task) => !task.completed);
     ul.innerHTML = '';
     displayItems();
-    IsCompleted.updateLocalStorage(todos);
+    IsCompleted.updateLocalStorage(tasks);
   });
 };
-
 clearAllCompleted();
 
 const remove = () => {
@@ -73,10 +58,10 @@ const remove = () => {
     const ul = document.getElementById('list');
     if (e.target && e.target.className.includes('trash')) {
       const id = parseInt(e.target.parentNode.id, 10);
-      todos.filter((todo) => todo.index !== id);
+      tasks = tasks.filter((task) => task.index !== id);
       ul.innerHTML = '';
       displayItems();
-      IsCompleted.updateLocalStorage(todos);
+      IsCompleted.updateLocalStorage(tasks);
     } else if (e.target && !e.target.className.includes('text')) {
       const allLi = document.querySelector('#list').childNodes;
       allLi.forEach((list) => {
@@ -98,11 +83,12 @@ const editDesc = () => {
   const inputs = document.querySelectorAll('.text');
   inputs.forEach((input, index) => {
     ul.addEventListener('keydown', (e) => {
-      if (e.target.className.includes(`text-${index}`) && e.key === 'Enter' && varlue !== '') {
-        todos[index].description = value;
+      const { value } = e.target;
+      if (e.target.className.includes(`text-${index}`) && e.key === 'Enter' && value !== '') {
+        tasks[index].description = value;
         ul.innerHTML = '';
         displayItems();
-        Completed.updateLocalStorage(todos);
+        IsCompleted.updateLocalStorage(tasks);
       }
     });
   });
