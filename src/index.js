@@ -48,7 +48,7 @@ const addTodo = () => {
 	Completed.updateLocalStorage(todos);
       }
       input.value = '';
-      event.preventDefault();
+      e.preventDefault();
     }
   });
 };
@@ -92,3 +92,19 @@ const remove = () => {
 };
 
 remove();
+
+const editDesc = () => {
+  const ul = document.getElementById('list');
+  const inputs = document.querySelectorAll('.text');
+  inputs.forEach((input, index) => {
+    ul.addEventListener('keydown', (e) => {
+      if (e.target.className.includes(`text-${index}`) && e.key === 'Enter' && varlue !== '') {
+        todos[index].description = value;
+        ul.innerHTML = '';
+        displayItems();
+        Completed.updateLocalStorage(todos);
+      }
+    });
+  });
+};
+editDesc();
