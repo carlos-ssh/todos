@@ -94,3 +94,6 @@ const editDesc = () => {
   });
 };
 editDesc();
+
+module.exports = addToTheList;
+module.exports = remove;
